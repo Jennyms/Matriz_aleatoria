@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package matriz_aleatoria;
+import java.awt.Color;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.ImageIcon;
 /**
  *
@@ -14,6 +17,7 @@ public class M_aleat extends javax.swing.JFrame {
     /**
      * Creates new form M_aleat
      */
+    int contador =0;
     public M_aleat() {
         initComponents();
         cuadtrotext.setEditable(false);
@@ -24,8 +28,35 @@ public class M_aleat extends javax.swing.JFrame {
         jButton1.setContentAreaFilled(false);
         setIconImage(new ImageIcon(getClass().getResource("../iconos/matriz-de-puntos.png")).getImage());
         
-    }
+        jLabel1.setForeground(Color.white);
+        int velocidad=1; //segundos
+        Timer timer;
+        TimerTask tarea;
+        
+        int velmil= velocidad*1000;
+        
+        tarea = new TimerTask() {
+            @Override
+            public void run() {
+                
+                switch (contador){
+                    case 0: 
+                        contador = 1;
+                        jLabel1.setForeground(Color.black);
+                        break;
+                    case 1: 
+                        contador = 0;
+                        jLabel1.setForeground(Color.white);
+                        break;
+                        //Hola
+                }
+            }
+        };
+        timer = new Timer();
+        timer.scheduleAtFixedRate(tarea, velmil, velmil);
 
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,7 +102,7 @@ public class M_aleat extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Algerian", 0, 20)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Algerian", 0, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Matriz Aleatoria ");
 
@@ -88,7 +119,7 @@ public class M_aleat extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(260, 260, 260)
+                .addGap(165, 165, 165)
                 .addComponent(jButton1)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -103,11 +134,11 @@ public class M_aleat extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 21, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,44 +168,44 @@ public class M_aleat extends javax.swing.JFrame {
 
     private void numerosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numerosActionPerformed
         // TODO add your handling code here:
-        String tablama [][]= new String [5][5];
+        String tablama[][] = new String[5][5];
         cuadtrotext.setText("");
-        String fila="";
-        String fila2="";
+        String fila = "";
+        String fila2 = "";
         fila += "\n" + "\n" + "\n";
         fila2 += "\n" + "\n" + "\n";
-        for( int x=0; x< tablama.length; x++){
-            fila += "\t"+"[  ";
-            fila2 += "\t"+"[  ";
-            for(int y=0; y< tablama[x].length; y++){
-                int random= (int) (Math.random()*49+1);
-                if ((random%2)==0){
-                    
-                    if(y + 1 == 5){
-                        fila2 +="$";
-                    }else {
-                        fila2 += "$" +"\t";
+        for (int x = 0; x < tablama.length; x++) {
+            fila += "\t" + "[  ";
+            fila2 += "\t" + "[  ";
+            for (int y = 0; y < tablama[x].length; y++) {
+                int random = (int) (Math.random() * 49 + 1);
+                if ((random % 2) == 0) {
+
+                    if (y + 1 == 5) {
+                        fila2 += "$";
+                    } else {
+                        fila2 += "$" + "\t";
                     }
-                }else{
-                    if (y + 1 == 5){
-                        fila2+= "#";
-                    }else{
-                       fila2 += "#" +"\t"; 
+                } else {
+                    if (y + 1 == 5) {
+                        fila2 += "#";
+                    } else {
+                        fila2 += "#" + "\t";
                     }
-                }if (y + 1 ==5){
-                    fila+= random;
-                }else{
-                    fila+= random + "\t";
+                }
+                if (y + 1 == 5) {
+                    fila += random;
+                } else {
+                    fila += random + "\t";
                 }
             }
-            fila +="  ]"+"\n"+"\n";
-            fila2 += "  ]"+"\n"+"\n";
+            fila += "  ]" + "\n" + "\n";
+            fila2 += "  ]" + "\n" + "\n";
         }
         cuadtrotext.setText(fila);
         cuadrotext2.setText(fila2);
-        
-        
-        
+
+
     }//GEN-LAST:event_numerosActionPerformed
 
     /**

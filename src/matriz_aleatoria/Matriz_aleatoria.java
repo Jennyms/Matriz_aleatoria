@@ -19,7 +19,7 @@ public class Matriz_aleatoria {
         M_aleat ventana =new M_aleat();
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
-        
+  
     }
     
 }
